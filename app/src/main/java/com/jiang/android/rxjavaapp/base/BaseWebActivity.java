@@ -4,6 +4,7 @@ package com.jiang.android.rxjavaapp.base;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.jiang.android.rxjavaapp.R;
@@ -60,6 +61,7 @@ public class BaseWebActivity extends BaseActivity {
         }
 
         if (!TextUtils.isEmpty(mWebUrl)) {
+            Log.i("reactive", mWebUrl);
             mBrowserLayout.loadUrl(mWebUrl);
         } else {
             showToast(mBrowserLayout, "获取URL地址失败");

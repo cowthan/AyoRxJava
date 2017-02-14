@@ -35,14 +35,18 @@ dependencies {
     compile configer['lib_cardview']
     //compile configer['lib_leanback']
 
-//    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
-//    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+
+//    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'   //这个带了rxjava-1.2.3，和rxandroid-1.2.1，都是第一代
 //    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:1.0.0'
 //    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.0'
 //    compile 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
 //    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:1.0.0'
     //compile 'com.jakewharton.rxbinding:rxbinding-leanback-v17:1.0.0'
+
+    compile 'io.reactivex.rxjava2:rxjava:2.0.1'  //这个是rxjava第二代，和第一代不在一个包下
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+
 
     //preference非要这个
     compile 'com.android.support:support-annotations:23.1.1'

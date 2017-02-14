@@ -37,10 +37,13 @@ import com.jiang.android.rxjavaapp.database.operators;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Single;
-import rx.SingleSubscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleObserver;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by jiang on 16/3/13.
@@ -55,32 +58,35 @@ public class DataUtils {
     static final String TRAMPOLINE = "trampoline";
 
     public static void fillData(final callBack call) {
-        Single.create(new Single.OnSubscribe<Boolean>() {
+
+        Single.create(new SingleOnSubscribe<Boolean>() {
             @Override
-            public void call(SingleSubscriber<? super Boolean> singleSubscriber) {
-                try {
-                    List<operators> lists = getOperatorsData();
-                    List<alloperators> alloperatorses = getAllOperators();
-                    DbUtil.getOperatorsService().save(lists);
-                    DbUtil.getAllOperatorsService().save(alloperatorses);
-                    singleSubscriber.onSuccess(true);
-                } catch (Exception e) {
-                    singleSubscriber.onError(e);
-                }
+            public void subscribe(SingleEmitter<Boolean> e) throws Exception {
+                List<operators> lists = getOperatorsData();
+                List<alloperators> alloperatorses = getAllOperators();
+                DbUtil.getOperatorsService().save(lists);
+                DbUtil.getAllOperatorsService().save(alloperatorses);
+                e.onSuccess(true);
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleSubscriber<Boolean>() {
+                .subscribe(new SingleObserver<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
                     @Override
                     public void onSuccess(Boolean value) {
                         call.onSuccess();
                     }
 
                     @Override
-                    public void onError(Throwable error) {
-                        call.onFail(error);
+                    public void onError(Throwable e) {
+                        call.onFail(e);
                     }
                 });
+
 
     }
 

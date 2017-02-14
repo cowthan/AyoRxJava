@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,13 +35,16 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+
+public class Rx1MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int REQUEST_STORAGE = 1010;
     private Toolbar toolbar;
@@ -72,26 +76,81 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void getAllOperatorById(final long parent_id) {
 
-        Observable.create(new Observable.OnSubscribe<List<alloperators>>() {
-            @Override
-            public void call(Subscriber<? super List<alloperators>> subscriber) {
-                try {
-                    subscriber.onNext(DbUtil.getAllOperatorsService()
-                            .query("where operators_id=?", new String[]{String.valueOf(parent_id)}));
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
 
+        Observable.create(new ObservableOnSubscribe<List<alloperators>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<alloperators>> e) throws Exception {
+                e.onNext(DbUtil.getAllOperatorsService().query("where operators_id=?", new String[]{String.valueOf(parent_id)}));
+                e.onComplete();
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<alloperators>>() {
+                .subscribe(new Observer<List<alloperators>>() {
                     @Override
-                    public void call(List<alloperators> operatorses) {
+                    public void onSubscribe(Disposable d) {
+                        //Disposable是1.x的Subscription改名的，因为Reactive-Streams规范用这个名称，为了避免重复
+                        //这个回调方法是在2.0之后新添加的
+                        //可以使用d.dispose()方法来取消订阅
+                    }
+
+                    @Override
+                    public void onNext(List<alloperators> value) {
                         mContentLists.clear();
-                        mContentLists.addAll(operatorses);
+                        mContentLists.addAll(value);
                         initContentAdapter();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e("onComplete", "complete");
+                    }
+                });
+
+//        .subscribe(new Action1<List<alloperators>>() {
+//            @Override
+//            public void call(List<alloperators> operatorses) {
+//                mContentLists.clear();
+//                mContentLists.addAll(operatorses);
+//                initContentAdapter();
+//            }
+//        });
+
+        Observable.create(new ObservableOnSubscribe<List<alloperators>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<alloperators>> e) throws Exception {
+                e.onNext(DbUtil.getAllOperatorsService().query("where operators_id=?", new String[]{String.valueOf(parent_id)}));
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<alloperators>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        //Disposable是1.x的Subscription改名的，因为Reactive-Streams规范用这个名称，为了避免重复
+                        //这个回调方法是在2.0之后新添加的
+                        //可以使用d.dispose()方法来取消订阅
+                    }
+
+                    @Override
+                    public void onNext(List<alloperators> value) {
+                        mContentLists.clear();
+                        mContentLists.addAll(value);
+                        initContentAdapter();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e("onComplete", "complete");
                     }
                 });
 
@@ -168,28 +227,38 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mNavRecyclerView.setLayoutManager(manager);
         mNavRecyclerView.setHasFixedSize(true);
 
-        Observable.create(new Observable.OnSubscribe<List<operators>>() {
+        Observable.create(new ObservableOnSubscribe<List<operators>>() {
             @Override
-            public void call(Subscriber<? super List<operators>> subscriber) {
-                try {
-                    subscriber.onNext(DbUtil.getOperatorsService().queryAll());
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
-
+            public void subscribe(ObservableEmitter<List<operators>> e) throws Exception {
+                e.onNext(DbUtil.getOperatorsService().queryAll());
+                e.onComplete();
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<operators>>() {
+                .subscribe(new Observer<List<operators>>() {
                     @Override
-                    public void call(List<operators> operatorses) {
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(List<operators> value) {
                         mList.clear();
-                        mList.addAll(operatorses);
+                        mList.addAll(value);
                         initAdapter();
                         initContentRecyclerView();
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
+
 
 
     }

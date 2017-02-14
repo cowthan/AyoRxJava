@@ -36,7 +36,7 @@ public class LauncherActivity extends AppCompatActivity {
             DataUtils.fillData(new DataUtils.callBack() {
                 @Override
                 public void onSuccess() {
-                    startActivity(new Intent(LauncherActivity.this, MainActivity.class));
+                    startActivity(new Intent(LauncherActivity.this, Rx1MainActivity.class));
                     LauncherActivity.this.finish();
 
                 }
@@ -49,7 +49,7 @@ public class LauncherActivity extends AppCompatActivity {
             });
 
         } else {
-            startActivity(new Intent(LauncherActivity.this, MainActivity.class));
+            startActivity(new Intent(LauncherActivity.this, Rx1MainActivity.class));
             LauncherActivity.this.finish();
         }
     }

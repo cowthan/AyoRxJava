@@ -15,14 +15,70 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.Rx1MainActivity" />
         <activity android:name=".base.BaseWebActivity" />
         <activity android:name=".activity.PhotoPagerActivity" />
-        <activity android:name=".activity.LauncherActivity">
+        <activity android:name=".activity.LauncherActivity" />
+        <activity android:name="org.ayo.rx.sample.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity
+            android:name="org.ayo.component.tmpl.TmplStarndardActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:launchMode="standard"
+            android:theme="@style/AppTheme.Transparent" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="ayo" android:host="page" android:path="/standard" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.ayo.component.tmpl.TmplSingleTopActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Transparent"  >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="ayo" android:host="page" android:path="/singletop" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.ayo.component.tmpl.TmplSingleTaskActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Transparent"  >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="ayo" android:host="page" android:path="/singletask" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.ayo.component.tmpl.TmplSingleInstanceActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|navigation"
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.Transparent"  >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="ayo" android:host="page" android:path="/singleinstance" />
             </intent-filter>
         </activity>
     </application>
