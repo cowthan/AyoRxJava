@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jiang.android.rxjavaapp.R;
@@ -26,6 +27,7 @@ public abstract class BaseRxDemo extends MasterFragment {
     }
 
     TextView tv;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate2(View view, @Nullable Bundle bundle) {
@@ -33,10 +35,12 @@ public abstract class BaseRxDemo extends MasterFragment {
         Button btn2 = id(R.id.btn2);
 
         tv = id(R.id.tv);
+        scrollView = id(R.id.scrollView);
 
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                clearLog();
                 runOk();
             }
         });
@@ -44,6 +48,7 @@ public abstract class BaseRxDemo extends MasterFragment {
         btn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                clearLog();
                 runError();
             }
         });
@@ -61,6 +66,16 @@ public abstract class BaseRxDemo extends MasterFragment {
 
     protected void notifyy(String s){
         tv.append("\n" + s);
+        if(tv.getHeight() > scrollView.getHeight()){
+            int dis = scrollView.getHeight() - tv.getHeight(); //负数
+            //Log.i("notify", scrollView.getHeight() + ", " + tv.getHeight());
+            scrollView.scrollTo(0, -dis);
+        }
+    }
+
+    protected void clearLog(){
+        tv.setText("");
+        scrollView.scrollTo(0, 0);
     }
 
     protected void sleep(){

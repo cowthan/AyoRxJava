@@ -633,6 +633,17 @@ processor.onComplete();
 
 9 操作符
 
+-------------------创建系列操作
+- just
+    - 1到9个参数，每个参数就是一个item
+- from
+    - 将每个元素作为一个item
+- repeat
+    - 总是会调用emitter的subscribe，所以总是会去Model层拿数据
+    - 只会complete一次！
+    - 遇到error就停止
+- repeatWhen
+    - 怎么个意思
 
 take
 interval

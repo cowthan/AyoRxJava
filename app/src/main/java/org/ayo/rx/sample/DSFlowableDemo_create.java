@@ -28,6 +28,8 @@ public class DSFlowableDemo_create extends BaseRxDemo {
         return "Flowable.create";
     }
 
+    Subscription task = null;
+
     protected void runOk(){
         Flowable.create(new FlowableOnSubscribe<String>() {
             @Override
@@ -47,6 +49,7 @@ public class DSFlowableDemo_create extends BaseRxDemo {
                 //这一步是必须，我们通常可以在这里做一些初始化操作，调用request()方法表示初始化工作已经完成
                 //调用request()方法，会立即触发onNext()方法
                 //在onComplete()方法完成，才会再执行request()后边的代码
+                task = s;
                 s.request(Long.MAX_VALUE);
             }
 
@@ -65,8 +68,15 @@ public class DSFlowableDemo_create extends BaseRxDemo {
             public void onComplete() {
                 //由于Reactive-Streams的兼容性，方法onCompleted被重命名为onComplete
                 Log.e("hahahahha--onComplete", "complete--flowable");
+                task = null;
             }
         });
+    }
+
+    @Override
+    protected void onDestroy2() {
+        super.onDestroy2();
+        if(task != null) task.cancel();
     }
 
     protected void runError(){
