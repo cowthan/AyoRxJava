@@ -38,7 +38,7 @@ public class CommonString {
     public static final String SUBJECT = "https://github.com/jiang111/RxDocs/raw/master/images/S.AsyncSubject.png";
     public static final String JUST = "https://github.com/jiang111/RxDocs/raw/master/images/operators/just.png";
     public static final String FROM = "https://github.com/jiang111/RxDocs/raw/master/images/operators/from.png";
-    public static final String REPEAT = "https://github.com/jiang111/RxDocs/raw/master/images/operators/repeat.c.png";
+    public static final String REPEAT = "https://github.com/jiang111/RxDocs/raw/master/images/operators/repeat.png";
     public static final String REPEAT_WHEN = "https://github.com/jiang111/RxDocs/raw/master/images/operators/repeatWhen.f.png";
     public static final String CREATE = "https://github.com/jiang111/RxDocs/raw/master/images/operators/create.c.png";
     public static final String DEFER = "https://github.com/jiang111/RxDocs/raw/master/images/operators/defer.c.png";

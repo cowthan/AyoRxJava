@@ -21,7 +21,7 @@ public class Rx_interval extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.interval";
+        return "interval";
     }
 
     private Disposable task;

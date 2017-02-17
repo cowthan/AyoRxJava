@@ -76,7 +76,7 @@
             android:theme="@style/AppTheme.Transparent"  >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW"/>ich
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="ayo" android:host="page" android:path="/singleinstance" />
             </intent-filter>

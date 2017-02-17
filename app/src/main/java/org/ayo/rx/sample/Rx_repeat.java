@@ -24,7 +24,7 @@ public class Rx_repeat extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.repeat(3)";
+        return "repeat";
     }
 
     private Disposable task;

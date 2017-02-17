@@ -17,7 +17,7 @@ public class Rx_empty extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.empty";
+        return "empty";
     }
 
     private Disposable task;

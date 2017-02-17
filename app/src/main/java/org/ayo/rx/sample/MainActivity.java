@@ -78,6 +78,7 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("buffer", "", Rx_buffer.class));
                 menuItem.addLeaf(new Leaf("window", "", null));
                 menuItem.addLeaf(new Leaf("cast", "", null));
+
                 menuItem.addLeaf(new Leaf("-----过滤操作", "", null));
                 menuItem.addLeaf(new Leaf("filter", "", null));
                 menuItem.addLeaf(new Leaf("take", "", null));
@@ -102,15 +103,20 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("distinctUntilChanged", "", null));
                 menuItem.addLeaf(new Leaf("ofType", "", null));
                 menuItem.addLeaf(new Leaf("ignoreElements", "", null));
+
                 menuItem.addLeaf(new Leaf("-----结合操作", "", null));
-                menuItem.addLeaf(new Leaf("startWith", "", null));
-                menuItem.addLeaf(new Leaf("merge", "", null));
-                menuItem.addLeaf(new Leaf("mergeDelayError", "", null));
-                menuItem.addLeaf(new Leaf("zip", "", null));
-                menuItem.addLeaf(new Leaf("and then when", "", null));
-                menuItem.addLeaf(new Leaf("combineLatest", "", null));
-                menuItem.addLeaf(new Leaf("join groupJoin", "", null));
-                menuItem.addLeaf(new Leaf("switchOnNext", "", null));
+                menuItem.addLeaf(new Leaf("startWith", "", Rx_startWith.class));
+                menuItem.addLeaf(new Leaf("concat", "", Rx_concat.class));
+                menuItem.addLeaf(new Leaf("merge", "", Rx_merge.class));
+                menuItem.addLeaf(new Leaf("mergeDelayError", "", Rx_mergeDelayError.class));
+                menuItem.addLeaf(new Leaf("zip", "", Rx_zip.class));
+                menuItem.addLeaf(new Leaf("and", "", Rx_and.class));
+                menuItem.addLeaf(new Leaf("then", "", Rx_then.class));
+                menuItem.addLeaf(new Leaf("when", "", Rx_when.class));
+                menuItem.addLeaf(new Leaf("combineLatest", "",  Rx_combineLatest.class));
+                menuItem.addLeaf(new Leaf("join", "", Rx_join.class));
+                menuItem.addLeaf(new Leaf("groupJoin", "", Rx_groupJoin.class));
+                menuItem.addLeaf(new Leaf("switchOnNext", "", Rx_switchOnNext.class));
 
                 menuItem.addLeaf(new Leaf("-----错误操作", "", null));
                 menuItem.addLeaf(new Leaf("onErrorResumeNext", "", null));

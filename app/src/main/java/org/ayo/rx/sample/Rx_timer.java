@@ -25,7 +25,7 @@ public class Rx_timer extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.timer";
+        return "timer";
     }
 
     private Disposable task;

@@ -41,13 +41,22 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
+import org.ayo.Ayo;
+import org.ayo.sample.menu.notify.ToasterDebug;
+
 /**
  * Created by jiang on 16/3/13.
  */
 public class App extends Application {
+
+    public static App app;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        App.app = this;
+        Ayo.init(this, "/rxjava", true, true);
+        ToasterDebug.init(this);
         DbCore.init(this);
         initImageLoader(getApplicationContext());
     }

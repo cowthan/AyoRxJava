@@ -27,7 +27,7 @@ public class Rx_defer extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.defer";
+        return "defer";
     }
 
     private Disposable task;

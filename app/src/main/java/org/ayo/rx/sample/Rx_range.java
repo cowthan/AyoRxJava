@@ -24,7 +24,7 @@ public class Rx_range extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.range";
+        return "range";
     }
 
     private Disposable task;

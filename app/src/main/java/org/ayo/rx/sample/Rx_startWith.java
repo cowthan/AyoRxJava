@@ -5,6 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.internal.functions.Functions;
 import io.reactivex.internal.operators.flowable.FlowableInternalHelper;
 import io.reactivex.schedulers.Schedulers;
 
@@ -12,34 +13,34 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_error extends BaseRxDemo {
+public class Rx_startWith extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "error";
+        return "empty";
     }
 
     private Disposable task;
 
     protected void runOk(){
         /*
-        - error
-            - 直接调用onError
+        - startWith
+            - 在原始Observable发射item之前增加几项item
+            - startWith(T)
+            - startWithArray(T[])
+            - startWith(Iterable<T>)
+            - startWith(Publisher<T>)
          */
-        task = Flowable.error(new RuntimeException("测试Flowable.error()"))
+        task = Flowable.fromIterable(DataMgmr.Memory.getDataListQuick())
+                .startWithArray("..", "....", "......", "哎呦我草泥马")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
-                               @Override
-                               public void accept(Object s) throws Exception {
-                                   notifyy("item--" + s);
-                               }
-                           }, new Consumer<Throwable>() {
-                               @Override
-                               public void accept(Throwable throwable) throws Exception {
-                                   notifyy("意料中的出错--" + throwable.getMessage());
-                               }
-                           },
+                    @Override
+                    public void accept(Object s) throws Exception {
+                        notifyy("item--" + s);
+                    }
+                }, Functions.ERROR_CONSUMER,
                         new Action() {
                             @Override
                             public void run() throws Exception {

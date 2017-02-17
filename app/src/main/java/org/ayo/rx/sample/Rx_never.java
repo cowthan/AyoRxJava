@@ -17,7 +17,7 @@ public class Rx_never extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.never";
+        return "never";
     }
 
     private Disposable task;

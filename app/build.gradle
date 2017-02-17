@@ -40,7 +40,9 @@ dependencies {
     compile project(':ayo-rxjava')
     compile(name: 'ayo-component', ext: 'aar')
     compile(name: 'ayo-menu', ext: 'aar')
-
+    compile(name: 'ayo-lang', ext: 'aar')
+    compile(name: 'markdown', ext: 'aar')
+    compile(name: 'richtext', ext: 'aar')
 
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.commit451:PhotoView:1.2.4'

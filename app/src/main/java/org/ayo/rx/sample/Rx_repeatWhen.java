@@ -27,7 +27,7 @@ public class Rx_repeatWhen extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.repeatWhen";
+        return "repeatWhen";
     }
 
     private Disposable task;

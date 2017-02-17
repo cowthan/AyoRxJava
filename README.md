@@ -1,7 +1,10 @@
 # AyoRxJava
 整理一下Rx相关的文章和demo，给众多Rx的第三方库找个归属，太TM乱了
 
-
+- http://www.jianshu.com/p/7e28c8216c7d
+- http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0907/6604.html
+- http://reactivex.io/documentation/operators/repeat.html
+- http://m.blog.csdn.net/article/details?id=52396175
 
 https://github.com/ReactiveX/RxJava
 
@@ -13,6 +16,7 @@ https://github.com/trello/RxLifecycle
 
 
 https://github.com/JakeWharton/RxBinding
+
 
 
 
