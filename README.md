@@ -548,6 +548,114 @@ Flowable.range(1,10).subscribe(new Subscriber<Integer>() {
 });
 ```
 
+3 错误处理
+
+`1 在数据源里发生异常`
+- 这里面的异常，会传到onError里，从而传给Consumer<Throwable>
+- 不管是不是显式的调用了onError，都会激活subscriber里的onError
+- 出了Error就不会走onComplete了
+- 如果数据源里的onNext之间有延时，在本例中，1和2还是会发出来的
+- 如果数据源里的onNext之间没有延时，在本例中，1和2也发不出来，这是为什么？？
+
+捕捉异常，以下方式能够截获这里的异常，并能尝试修正数据流：
+- `onErrorResumeNext`(Observable.just("onErrorResumeNext-111", "onErrorResumeNext-222"))
+    - 会用备用Observable代替错误，并继续发送item
+    - 这里的例子里，onNext会收到：1, 2, onErrorResumeNext-111,onErrorResumeNext-222，然后走onComplete
+- `onExceptionResumeNext`
+    - 和onErrorResumeNext一样，只不过只能捕捉Exception
+- 上面两个方式没办法知道发生了什么异常
+- `onErrorReturn`：在发生异常时，发射一条数据，走onNext，再走onComplete，而且可以拿到异常
+```
+onErrorReturn(new Function<Throwable, String>() {
+    @Override
+    public String apply(Throwable throwable) throws Exception {
+        return "onErrorReturn了";
+    }
+})
+```
+
+重试：
+- `retry`：.retry(3)重试3次，当原始Observable在遇到错误时进行重试，注意retry3次，实际上一共发了4次。。。
+    - 失败一次，retry了3次之后，如果还是失败，会激活onError，在此之前不会激活
+    - 如果重试成功了，那就onComplete了
+- 'retry(count, Predicate)'：Predicate可以用来根据异常类型决定是否继续重试，返回true就是还要重试
+```
+.retry(3, new Predicate<Throwable>() {
+    @Override
+    public boolean test(Throwable throwable) throws Exception {
+        return false;
+    }
+})
+```
+- `retry(BiPredicate<Integer, Throwable>)`：用来根据重试次数和异常，决定是否要继续重试
+```
+retry(new BiPredicate<Integer, Throwable>() {
+        @Override
+        public boolean test(Integer integer, Throwable throwable) throws Exception {
+            if(integer <= 2){
+                return true;
+            }
+            return false;
+        }
+    })
+```
+- `retry(BooleanSupplier)`：重试直到满足条件，条件在getAsBoolean里自己判断
+```
+retryUntil(new BooleanSupplier() {
+        @Override
+        public boolean getAsBoolean() throws Exception {
+            boolean shouldStopRetry = true;
+            return shouldStopRetry;
+        }
+    })
+```
+
+- `retryWhen`：这个是根据一个Observable是否发item来决定是否重试，发一个item就重试一次
+    - 这个比较奇怪，interval会一直重试，timer不会重试，just(1, 2, 3)只重试了两次，所以总是少一次
+    - 而且还会调用onComplete，卧槽
+    - timer没激活重试，也没激活onComplete
+    - interval不会停，没试
+    - just(1, 2, 3)，激活了onCOmplete
+
+```
+Flowable.create(new FlowableOnSubscribe<String>() {
+        @Override
+        public void subscribe(FlowableEmitter<String> e) throws Exception {
+            e.onNext("1");
+            e.onNext("2");
+            if(1 + 1 == 2){
+                throw new RuntimeException("Don't worry, just test");   ///---1 数据源
+            }else{
+                e.onComplete();
+            }
+        }
+    }, BackpressureStrategy.BUFFER)
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(new Consumer<String>() {
+                   @Override
+                   public void accept(String s) throws Exception {
+                       if ("3".equals(s)) {
+                           throw new RuntimeException("Don't worry, just test");   ///---2  onNext
+                       } else {
+                           notifyy(s);
+                       }
+                   }
+               }, new Consumer<Throwable>() {
+                   @Override
+                   public void accept(Throwable throwable) throws Exception {
+                       ToasterDebug.toastShort("出异常了：" + throwable.getMessage());  ///---3 onError
+                       throwable.printStackTrace();
+                   }
+               },
+            new Action() {
+                @Override
+                public void run() throws Exception {
+                    notifyy("onComplete---结束了！@@");               ///---4 onComplete
+                }
+            },
+            FlowableInternalHelper.RequestMax.INSTANCE);
+```
 
 
 3 线程调度：subscribeOn和observeOn

@@ -168,7 +168,7 @@ public class MainActivity extends MainPagerActivity {
             m.addMenuItem(menuItem);
             {
                 menuItem.addLeaf(new Leaf("-----错误操作", "", null));
-                menuItem.addLeaf(new Leaf("onErrorResumeNext", "", null));
+                menuItem.addLeaf(new Leaf("onErrorResumeNext", "", Rx_onErrorResumeNext.class));
                 menuItem.addLeaf(new Leaf("onErrorReturn", "", null));
                 menuItem.addLeaf(new Leaf("onEcxceptionResumeNext", "", null));
                 menuItem.addLeaf(new Leaf("retry", "", null));
