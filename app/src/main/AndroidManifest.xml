@@ -10,7 +10,7 @@
         android:name=".App"
         android:allowBackup="true"
         android:configChanges="orientation|keyboardHidden|screenSize"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/pic3"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:supportsRtl="true"

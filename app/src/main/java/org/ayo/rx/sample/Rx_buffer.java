@@ -32,11 +32,6 @@ public class Rx_buffer extends BaseRxDemo {
     private Disposable task;
 
     protected void runOk(){
-        /*
-        - buffer
-            - Publisher<String> apply(String s)
-            - 好像和flatMap一样啊
-         */
         List<String> list = DataMgmr.Memory.getDataListQuick();
         task = Flowable.create(new FlowableOnSubscribe<String>() {
             @Override

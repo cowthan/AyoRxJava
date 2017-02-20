@@ -17,7 +17,7 @@ public class Rx_switchOnNext extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "empty";
+        return "switchOnNext";
     }
 
     private Disposable task;

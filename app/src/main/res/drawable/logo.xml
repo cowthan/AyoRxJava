@@ -10,6 +10,6 @@
     <item android:bottom="48dp">
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/pic3" />
     </item>
 </layer-list>

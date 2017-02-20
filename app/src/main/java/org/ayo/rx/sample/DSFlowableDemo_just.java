@@ -14,7 +14,7 @@ public class DSFlowableDemo_just extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.just";
+        return "just";
     }
 
     protected void runOk(){

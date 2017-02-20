@@ -17,7 +17,7 @@ public class Rx_mergeDelayError extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "empty";
+        return "mergeDelayError";
     }
 
     private Disposable task;

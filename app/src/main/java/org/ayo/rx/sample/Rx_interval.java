@@ -27,13 +27,6 @@ public class Rx_interval extends BaseRxDemo {
     private Disposable task;
 
     protected void runOk(){
-        /*
-        - interval
-            - 用于间隔的延时任务
-            - interval(初次delay, 固定interval, TimeUnit.MILLISECONDS)
-            - 没机会调onComplete
-            - 具体发的item是什么值，从0开始，到无限
-         */
         task = Flowable.interval(2000, 500, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

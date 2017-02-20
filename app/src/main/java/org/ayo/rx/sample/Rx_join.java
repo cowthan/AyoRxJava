@@ -17,7 +17,7 @@ public class Rx_join extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "empty";
+        return "join";
     }
 
     private Disposable task;
