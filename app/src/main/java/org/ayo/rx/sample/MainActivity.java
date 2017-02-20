@@ -97,19 +97,32 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("groupJoin", "", Rx_groupJoin.class));
                 menuItem.addLeaf(new Leaf("switchOnNext", "", Rx_switchOnNext.class));
 
+
+
+            }
+
+            menuItem = new MenuItem("操作符2", R.drawable.weixin_normal, R.drawable.weixin_pressed);
+            m.addMenuItem(menuItem);
+            {
                 menuItem.addLeaf(new Leaf("-----过滤操作", "", null));
-                menuItem.addLeaf(new Leaf("filter", "", null));
-                menuItem.addLeaf(new Leaf("take", "", null));
-                menuItem.addLeaf(new Leaf("takeFirst", "", null));
-                menuItem.addLeaf(new Leaf("takeLast", "", null));
+                menuItem.addLeaf(new Leaf("filter", "", Rx_filter.class));
+                menuItem.addLeaf(new Leaf("ofType", "", Rx_ofType.class));
+                menuItem.addLeaf(new Leaf("take", "", Rx_take.class));
+                menuItem.addLeaf(new Leaf("takeLast", "", Rx_takeLast.class));
+                menuItem.addLeaf(new Leaf("takeUntil--Pushlisher", "", Rx_takeUntil1.class));
+                menuItem.addLeaf(new Leaf("takeUntil--Predicate", "", Rx_takeUntil2.class));
+                menuItem.addLeaf(new Leaf("takeWhile--Predicate", "", Rx_takeWhile.class));
+                menuItem.addLeaf(new Leaf("skip", "", null));
+                menuItem.addLeaf(new Leaf("skipLast", "", null));
+                menuItem.addLeaf(new Leaf("skipUntil", "", null));
+                menuItem.addLeaf(new Leaf("skipUntil", "", null));
+                menuItem.addLeaf(new Leaf("skipWhile", "", null));
                 menuItem.addLeaf(new Leaf("first", "", null));
-                menuItem.addLeaf(new Leaf("firstOrDefault", "", null));
+                menuItem.addLeaf(new Leaf("firstElement", "", null));
+                menuItem.addLeaf(new Leaf("firstOrError", "", null));
                 menuItem.addLeaf(new Leaf("last", "", null));
                 menuItem.addLeaf(new Leaf("lastOrDefault", "", null));
                 menuItem.addLeaf(new Leaf("takeLastBuffer", "", null));
-                menuItem.addLeaf(new Leaf("skip", "", null));
-                menuItem.addLeaf(new Leaf("skipLast", "", null));
-                menuItem.addLeaf(new Leaf("elementAt", "", null));
                 menuItem.addLeaf(new Leaf("elementAtOrDefault", "", null));
                 menuItem.addLeaf(new Leaf("sample", "", null));
                 menuItem.addLeaf(new Leaf("throttleLast", "", null));
@@ -119,7 +132,6 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("timeout", "", null));
                 menuItem.addLeaf(new Leaf("distinct", "", null));
                 menuItem.addLeaf(new Leaf("distinctUntilChanged", "", null));
-                menuItem.addLeaf(new Leaf("ofType", "", null));
                 menuItem.addLeaf(new Leaf("ignoreElements", "", null));
 
                 menuItem.addLeaf(new Leaf("-----条件和布尔操作", "", null));
@@ -162,9 +174,9 @@ public class MainActivity extends MainPagerActivity {
 
                 menuItem.addLeaf(new Leaf("-----其他操作", "", null));
                 menuItem.addLeaf(new Leaf("自定义", "", null));
-
             }
-            menuItem = new MenuItem("操作符2", R.drawable.weixin_normal, R.drawable.weixin_pressed);
+
+            menuItem = new MenuItem("操作符3", R.drawable.weixin_normal, R.drawable.weixin_pressed);
             m.addMenuItem(menuItem);
             {
                 menuItem.addLeaf(new Leaf("-----错误操作", "", null));

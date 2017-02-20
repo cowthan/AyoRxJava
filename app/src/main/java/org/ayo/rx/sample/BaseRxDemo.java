@@ -49,6 +49,9 @@ public abstract class BaseRxDemo extends MasterFragment {
     protected abstract void runOk();
     protected abstract void runError();
     protected abstract String getTitle();
+    protected String getImageName(){
+        return getTitle();
+    }
 
     @Override
     protected int getLayoutId() {
@@ -159,7 +162,7 @@ public abstract class BaseRxDemo extends MasterFragment {
                     Log.i("debug", doc.toString());
                     textView.setText(doc);
                     try {
-                        Bitmap ballBm = getBitmapFromAssets(getTitle() + ".png", iv_ball.getWidth(), iv_ball.getHeight());
+                        Bitmap ballBm = getBitmapFromAssets(getImageName() + ".png", iv_ball.getWidth(), iv_ball.getHeight());
                         iv_ball.setImageBitmap(ballBm);
                     } catch (Exception e) {
                         e.printStackTrace();

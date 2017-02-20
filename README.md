@@ -4,7 +4,7 @@
 - http://www.jianshu.com/p/7e28c8216c7d
 - http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0907/6604.html
 - http://reactivex.io/documentation/operators/repeat.html
-- http://m.blog.csdn.net/article/details?id=52396175
+- http://blog.csdn.net/maplejaw_/article/details/52396175
 
 https://github.com/ReactiveX/RxJava
 
