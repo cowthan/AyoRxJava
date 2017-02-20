@@ -25,7 +25,7 @@ public class DSFlowableDemo_create extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.create";
+        return "create";
     }
 
     Subscription task = null;

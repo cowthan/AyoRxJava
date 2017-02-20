@@ -19,7 +19,7 @@ public class DSFlowableDemo_fromFuture extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.fromFuture";
+        return "from";
     }
 
     protected void runOk(){

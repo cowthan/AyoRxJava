@@ -17,7 +17,7 @@ public class Rx_and extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "empty";
+        return "and";
     }
 
     private Disposable task;

@@ -105,14 +105,6 @@ public abstract class BaseRxDemo extends MasterFragment {
         }, 1, TimeUnit.SECONDS);
         executorService.shutdown();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-
-            }
-        }).start();
-
         btn3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -189,14 +181,14 @@ public abstract class BaseRxDemo extends MasterFragment {
     private boolean docOpened = false;
 
     private void showDoc(){
-        ObjectAnimator oa = ObjectAnimator.ofFloat(container_doc, "translationX", -container_doc.getWidth(), 0);
+        ObjectAnimator oa = ObjectAnimator.ofFloat(container_doc, "translationX", container_doc.getWidth(), 0);
         oa.setDuration(400);
         oa.start();
         docOpened = true;
     }
 
     private void hideDoc(){
-        ObjectAnimator oa = ObjectAnimator.ofFloat(container_doc, "translationX", 0, -container_doc.getWidth());
+        ObjectAnimator oa = ObjectAnimator.ofFloat(container_doc, "translationX", 0, container_doc.getWidth());
         oa.setDuration(300);
         oa.start();
         docOpened = false;

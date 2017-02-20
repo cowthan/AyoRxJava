@@ -23,11 +23,12 @@ public class Rx_concat extends BaseRxDemo {
     private Disposable task;
 
     protected void runOk(){
-        /*
-        - empty
-            - 直接调用complete
-         */
-        task = Flowable.empty()
+        final String[] list1 = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+        final String[] list2 = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"};
+
+        Flowable<String> flowable1 = Flowable.fromArray(list1);
+        Flowable<String> flowable2 = Flowable.fromArray(list2);
+        task = Flowable.concat(flowable1, flowable2)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {

@@ -65,19 +65,37 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("empty", "", Rx_empty.class));
                 menuItem.addLeaf(new Leaf("error", "", Rx_error.class));
                 menuItem.addLeaf(new Leaf("never", "", Rx_never.class));
-                menuItem.addLeaf(new Leaf("throw", "", Rx_never.class));
-                menuItem.addLeaf(new Leaf("start", "", Rx_never.class));
+                menuItem.addLeaf(new Leaf("throw", "", null));
+                menuItem.addLeaf(new Leaf("start", "", null));
 
                 menuItem.addLeaf(new Leaf("-----变换操作", "", null));
                 menuItem.addLeaf(new Leaf("map", "", Rx_map.class));
                 menuItem.addLeaf(new Leaf("flatMap", "", Rx_flatMap.class));
+                menuItem.addLeaf(new Leaf("flatMapIterable", "", Rx_flatMapIterable.class));
+                menuItem.addLeaf(new Leaf("flatMapMaybe", "", Rx_flatMapMaybe.class));
+                menuItem.addLeaf(new Leaf("flatMapSingle", "", Rx_flatMapSingle.class));
+                menuItem.addLeaf(new Leaf("flatMapCompletable", "", Rx_flatMapCompletable.class));
                 menuItem.addLeaf(new Leaf("concatMap", "", Rx_contactMap.class));
-                menuItem.addLeaf(new Leaf("switchMap", "", null));
-                menuItem.addLeaf(new Leaf("scan", "", null));
-                menuItem.addLeaf(new Leaf("groupBy", "", null));
+                menuItem.addLeaf(new Leaf("scan", "", Rx_scan.class));
                 menuItem.addLeaf(new Leaf("buffer", "", Rx_buffer.class));
-                menuItem.addLeaf(new Leaf("window", "", null));
-                menuItem.addLeaf(new Leaf("cast", "", null));
+                menuItem.addLeaf(new Leaf("window", "", Rx_window.class));
+                menuItem.addLeaf(new Leaf("cast", "", Rx_cast.class));
+                menuItem.addLeaf(new Leaf("groupBy", "", Rx_groupBy.class));
+                menuItem.addLeaf(new Leaf("switchMap", "", null));
+
+                menuItem.addLeaf(new Leaf("-----合并操作", "", null));
+                menuItem.addLeaf(new Leaf("startWith", "", Rx_startWith.class));
+                menuItem.addLeaf(new Leaf("concat", "", Rx_concat.class));
+                menuItem.addLeaf(new Leaf("merge", "", Rx_merge.class));
+                menuItem.addLeaf(new Leaf("merge 2", "", Rx_merge2.class));
+                menuItem.addLeaf(new Leaf("zip", "", Rx_zip.class));
+                menuItem.addLeaf(new Leaf("combineLatest", "",  Rx_combineLatest.class));
+                menuItem.addLeaf(new Leaf("and", "", Rx_and.class));
+                menuItem.addLeaf(new Leaf("then", "", Rx_then.class));
+                menuItem.addLeaf(new Leaf("when", "", Rx_when.class));
+                menuItem.addLeaf(new Leaf("join", "", Rx_join.class));
+                menuItem.addLeaf(new Leaf("groupJoin", "", Rx_groupJoin.class));
+                menuItem.addLeaf(new Leaf("switchOnNext", "", Rx_switchOnNext.class));
 
                 menuItem.addLeaf(new Leaf("-----过滤操作", "", null));
                 menuItem.addLeaf(new Leaf("filter", "", null));
@@ -103,49 +121,6 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("distinctUntilChanged", "", null));
                 menuItem.addLeaf(new Leaf("ofType", "", null));
                 menuItem.addLeaf(new Leaf("ignoreElements", "", null));
-
-                menuItem.addLeaf(new Leaf("-----结合操作", "", null));
-                menuItem.addLeaf(new Leaf("startWith", "", Rx_startWith.class));
-                menuItem.addLeaf(new Leaf("concat", "", Rx_concat.class));
-                menuItem.addLeaf(new Leaf("merge", "", Rx_merge.class));
-                menuItem.addLeaf(new Leaf("mergeDelayError", "", Rx_mergeDelayError.class));
-                menuItem.addLeaf(new Leaf("zip", "", Rx_zip.class));
-                menuItem.addLeaf(new Leaf("and", "", Rx_and.class));
-                menuItem.addLeaf(new Leaf("then", "", Rx_then.class));
-                menuItem.addLeaf(new Leaf("when", "", Rx_when.class));
-                menuItem.addLeaf(new Leaf("combineLatest", "",  Rx_combineLatest.class));
-                menuItem.addLeaf(new Leaf("join", "", Rx_join.class));
-                menuItem.addLeaf(new Leaf("groupJoin", "", Rx_groupJoin.class));
-                menuItem.addLeaf(new Leaf("switchOnNext", "", Rx_switchOnNext.class));
-
-                menuItem.addLeaf(new Leaf("-----错误操作", "", null));
-                menuItem.addLeaf(new Leaf("onErrorResumeNext", "", null));
-                menuItem.addLeaf(new Leaf("onErrorReturn", "", null));
-                menuItem.addLeaf(new Leaf("onEcxceptionResumeNext", "", null));
-                menuItem.addLeaf(new Leaf("retry", "", null));
-                menuItem.addLeaf(new Leaf("retryWhen", "", null));
-
-                menuItem.addLeaf(new Leaf("-----辅助操作", "", null));
-                menuItem.addLeaf(new Leaf("materialize", "将Observable转换成一个通知列表", null));
-                menuItem.addLeaf(new Leaf("dematerialize", "将通知列表转换成一个Observable", null));
-                menuItem.addLeaf(new Leaf("timestamp", "给Observeable发射的每个数据项添加一个时间戳", null));
-                menuItem.addLeaf(new Leaf("serialize", "强制Observable按次序发射数据并要求功能是完好的", null));
-                menuItem.addLeaf(new Leaf("observeOn", "", null));
-                menuItem.addLeaf(new Leaf("subscribeOn", "", null));
-                menuItem.addLeaf(new Leaf("doOnEach", "注册一个动作，对Observable发射的每个数据项使用", null));
-                menuItem.addLeaf(new Leaf("doOnSubscribe", "注册一个动作，在观察者订阅时使用", null));
-                menuItem.addLeaf(new Leaf("doOnUnsubscribe", "注册一个动作，在观察者取消订阅时使用", null));
-                menuItem.addLeaf(new Leaf("doOnCompleted", "注册一个动作，对正常完成的Observabl使用", null));
-                menuItem.addLeaf(new Leaf("doOnError", "注册一个动作，对Observable的错误使用", null));
-                menuItem.addLeaf(new Leaf("doOnTerminate", "注册一个动作，对Observable完成时使用，无论是否出错", null));
-                menuItem.addLeaf(new Leaf("finallyDo", "注册一个动作，在Observable完成时使用", null));
-                menuItem.addLeaf(new Leaf("delay", "延时发射Observable的结果", null));
-                menuItem.addLeaf(new Leaf("delaySubscription", "延时处理订阅请求", null));
-                menuItem.addLeaf(new Leaf("timeInterval", "定期发送数据", null));
-                menuItem.addLeaf(new Leaf("using", "创建一个只在Observable生命周期存在的资源", null));
-                menuItem.addLeaf(new Leaf("single", "强制返回单个数据，否则抛出异常", null));
-                menuItem.addLeaf(new Leaf("toFuture", "将Observable转换成其他对象或数据结构，只能用于BlockingObservable", null));
-                menuItem.addLeaf(new Leaf("toIterable", "", null));
 
                 menuItem.addLeaf(new Leaf("-----条件和布尔操作", "", null));
                 menuItem.addLeaf(new Leaf("amb", "给定多个Observable，只让第一个发射数据的Observable发射全部数据", null));
@@ -175,6 +150,66 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("toMap", "", null));
                 menuItem.addLeaf(new Leaf("toMultiMap", "", null));
 
+
+                menuItem.addLeaf(new Leaf("-----字符串操作", "", null));
+                menuItem.addLeaf(new Leaf("byLine", "", null));
+                menuItem.addLeaf(new Leaf("decode", "", null));
+                menuItem.addLeaf(new Leaf("encode", "", null));
+                menuItem.addLeaf(new Leaf("from", "", null));
+                menuItem.addLeaf(new Leaf("join", "", null));
+                menuItem.addLeaf(new Leaf("split", "", null));
+                menuItem.addLeaf(new Leaf("stringConcat", "", null));
+
+                menuItem.addLeaf(new Leaf("-----其他操作", "", null));
+                menuItem.addLeaf(new Leaf("自定义", "", null));
+
+            }
+            menuItem = new MenuItem("操作符2", R.drawable.weixin_normal, R.drawable.weixin_pressed);
+            m.addMenuItem(menuItem);
+            {
+                menuItem.addLeaf(new Leaf("-----错误操作", "", null));
+                menuItem.addLeaf(new Leaf("onErrorResumeNext", "", Rx_onErrorResumeNext.class));
+                menuItem.addLeaf(new Leaf("onErrorReturn", "", null));
+                menuItem.addLeaf(new Leaf("onEcxceptionResumeNext", "", null));
+                menuItem.addLeaf(new Leaf("retry", "", null));
+                menuItem.addLeaf(new Leaf("retryWhen", "", null));
+
+                menuItem.addLeaf(new Leaf("-----辅助操作", "", null));
+                menuItem.addLeaf(new Leaf("materialize", "将Observable转换成一个通知列表", null));
+                menuItem.addLeaf(new Leaf("dematerialize", "将通知列表转换成一个Observable", null));
+                menuItem.addLeaf(new Leaf("timestamp", "给Observeable发射的每个数据项添加一个时间戳", null));
+                menuItem.addLeaf(new Leaf("serialize", "强制Observable按次序发射数据并要求功能是完好的", null));
+                menuItem.addLeaf(new Leaf("observeOn", "", null));
+                menuItem.addLeaf(new Leaf("subscribeOn", "", null));
+                menuItem.addLeaf(new Leaf("doOnEach", "注册一个动作，对Observable发射的每个数据项使用", null));
+                menuItem.addLeaf(new Leaf("doOnSubscribe", "注册一个动作，在观察者订阅时使用", null));
+                menuItem.addLeaf(new Leaf("doOnUnsubscribe", "注册一个动作，在观察者取消订阅时使用", null));
+                menuItem.addLeaf(new Leaf("doOnCompleted", "注册一个动作，对正常完成的Observabl使用", null));
+                menuItem.addLeaf(new Leaf("doOnError", "注册一个动作，对Observable的错误使用", null));
+                menuItem.addLeaf(new Leaf("doOnTerminate", "注册一个动作，对Observable完成时使用，无论是否出错", null));
+                menuItem.addLeaf(new Leaf("finallyDo", "注册一个动作，在Observable完成时使用", null));
+                menuItem.addLeaf(new Leaf("delay", "延时发射Observable的结果", null));
+                menuItem.addLeaf(new Leaf("delaySubscription", "延时处理订阅请求", null));
+                menuItem.addLeaf(new Leaf("timeInterval", "定期发送数据", null));
+                menuItem.addLeaf(new Leaf("using", "创建一个只在Observable生命周期存在的资源", null));
+                menuItem.addLeaf(new Leaf("single", "强制返回单个数据，否则抛出异常", null));
+                menuItem.addLeaf(new Leaf("toFuture", "将Observable转换成其他对象或数据结构，只能用于BlockingObservable", null));
+                menuItem.addLeaf(new Leaf("toIterable", "", null));
+
+                menuItem.addLeaf(new Leaf("-----阻塞操作", "", null));
+                menuItem.addLeaf(new Leaf("forEach", "", null));
+                menuItem.addLeaf(new Leaf("first", "", null));
+                menuItem.addLeaf(new Leaf("firstOrDefault", "", null));
+                menuItem.addLeaf(new Leaf("last", "", null));
+                menuItem.addLeaf(new Leaf("lastOrDefault", "", null));
+                menuItem.addLeaf(new Leaf("mostRecent", "", null));
+                menuItem.addLeaf(new Leaf("next", "", null));
+                menuItem.addLeaf(new Leaf("single", "", null));
+                menuItem.addLeaf(new Leaf("singleOrDefault", "", null));
+                menuItem.addLeaf(new Leaf("toFuture", "", null));
+                menuItem.addLeaf(new Leaf("toIterable", "", null));
+                menuItem.addLeaf(new Leaf("getIterator", "", null));
+
                 menuItem.addLeaf(new Leaf("-----异步操作", "", null));
                 menuItem.addLeaf(new Leaf("start", "", null));
                 menuItem.addLeaf(new Leaf("toAsync", "", null));
@@ -191,42 +226,6 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("publish", "", null));
                 menuItem.addLeaf(new Leaf("replay", "", null));
                 menuItem.addLeaf(new Leaf("refCount", "", null));
-
-                menuItem.addLeaf(new Leaf("-----阻塞操作", "", null));
-                menuItem.addLeaf(new Leaf("forEach", "", null));
-                menuItem.addLeaf(new Leaf("first", "", null));
-                menuItem.addLeaf(new Leaf("firstOrDefault", "", null));
-                menuItem.addLeaf(new Leaf("last", "", null));
-                menuItem.addLeaf(new Leaf("lastOrDefault", "", null));
-                menuItem.addLeaf(new Leaf("mostRecent", "", null));
-                menuItem.addLeaf(new Leaf("next", "", null));
-                menuItem.addLeaf(new Leaf("single", "", null));
-                menuItem.addLeaf(new Leaf("singleOrDefault", "", null));
-                menuItem.addLeaf(new Leaf("toFuture", "", null));
-                menuItem.addLeaf(new Leaf("toIterable", "", null));
-                menuItem.addLeaf(new Leaf("getIterator", "", null));
-
-                menuItem.addLeaf(new Leaf("-----字符串操作", "", null));
-                menuItem.addLeaf(new Leaf("byLine", "", null));
-                menuItem.addLeaf(new Leaf("decode", "", null));
-                menuItem.addLeaf(new Leaf("encode", "", null));
-                menuItem.addLeaf(new Leaf("from", "", null));
-                menuItem.addLeaf(new Leaf("join", "", null));
-                menuItem.addLeaf(new Leaf("split", "", null));
-                menuItem.addLeaf(new Leaf("stringConcat", "", null));
-
-                menuItem.addLeaf(new Leaf("-----其他操作", "", null));
-                menuItem.addLeaf(new Leaf("自定义", "", null));
-
-            }
-            menuItem = new MenuItem("其他问题", R.drawable.weixin_normal, R.drawable.weixin_pressed);
-            m.addMenuItem(menuItem);
-            {
-                menuItem.addLeaf(new Leaf("1111", "", null));
-                menuItem.addLeaf(new Leaf("2222", "", null));
-                menuItem.addLeaf(new Leaf("3333", "", null));
-                menuItem.addLeaf(new Leaf("44444", "", null));
-                menuItem.addLeaf(new Leaf("5666", "", null));
             }
         }
 

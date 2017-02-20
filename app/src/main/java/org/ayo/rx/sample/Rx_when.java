@@ -17,7 +17,7 @@ public class Rx_when extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "empty";
+        return "when";
     }
 
     private Disposable task;

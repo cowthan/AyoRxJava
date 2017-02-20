@@ -17,7 +17,7 @@ public class Rx_startWith extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "empty";
+        return "startWith";
     }
 
     private Disposable task;

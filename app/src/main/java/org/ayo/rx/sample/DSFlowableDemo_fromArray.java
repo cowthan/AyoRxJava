@@ -18,7 +18,7 @@ public class DSFlowableDemo_fromArray extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.fromArray";
+        return "from";
     }
 
     protected void runOk(){

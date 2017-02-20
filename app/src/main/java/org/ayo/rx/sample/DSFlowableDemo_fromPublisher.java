@@ -14,7 +14,7 @@ public class DSFlowableDemo_fromPublisher extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "Flowable.fromPublisher";
+        return "from";
     }
 
     protected void runOk(){
