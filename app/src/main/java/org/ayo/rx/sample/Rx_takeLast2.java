@@ -15,25 +15,26 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_take extends BaseRxDemo {
+public class Rx_takeLast2 extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
         return "take";
     }
-
     @Override
     protected String getImageName() {
-        return "take";
+        return "takeLast";
     }
+
+    private Disposable task;
 
     @Override
     protected String getCodeNormal() {
         return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
-                "    .take(4)";
+                "                .take(10)\n" +
+                "                .takeLast(4, TimeUnit.SECONDS)\n" +
+                "这个有点意思，得等10秒才能结束，然后取后四秒一下全输出\n（5,6,7,8,9）";
     }
-
-    private Disposable task;
 
     protected void runOk(){
         /*
@@ -41,7 +42,8 @@ public class Rx_take extends BaseRxDemo {
             - 直接调用complete
          */
         task = Flowable.interval(1, 1, TimeUnit.SECONDS)
-                .take(4)
+                .take(10)
+                .takeLast(4, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {

@@ -15,41 +15,38 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_take extends BaseRxDemo {
+public class Rx_throttleFirst extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "take";
+        return "sample";
     }
 
     @Override
     protected String getImageName() {
-        return "take";
+        return "throttleFirst";
     }
+
 
     @Override
     protected String getCodeNormal() {
-        return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
-                "    .take(4)";
+        return "Flowable.interval(0, 1, TimeUnit.SECONDS)\n" +
+                "       .throttleFirst(3000, TimeUnit.MILLISECONDS)";
     }
 
     private Disposable task;
 
     protected void runOk(){
-        /*
-        - empty
-            - 直接调用complete
-         */
-        task = Flowable.interval(1, 1, TimeUnit.SECONDS)
-                .take(4)
+        Flowable.interval(0, 1, TimeUnit.SECONDS)
+                .throttleFirst(3000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long s) throws Exception {
-                        notifyy(s + "");
-                    }
-                }, Functions.ERROR_CONSUMER,
+                               @Override
+                               public void accept(Long s) throws Exception {
+                                   notifyy(s + "");
+                               }
+                           }, Functions.ERROR_CONSUMER,
                         new Action() {
                             @Override
                             public void run() throws Exception {

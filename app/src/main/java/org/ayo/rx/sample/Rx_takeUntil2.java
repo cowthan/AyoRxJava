@@ -20,13 +20,24 @@ public class Rx_takeUntil2 extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "takeUntil2";
+        return "take";
     }
     @Override
     protected String getImageName() {
-        return "take";
+        return "takeUntil2";
     }
     private Disposable task;
+
+    @Override
+    protected String getCodeNormal() {
+        return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
+                "                .takeUntil(new Predicate<Long>() {\n" +
+                "                    @Override\n" +
+                "                    public boolean test(Long aLong) throws Exception {\n" +
+                "                        return aLong >= 5;\n" +
+                "                    }\n" +
+                "                })";
+    }
 
     protected void runOk(){
         /*
@@ -67,19 +78,5 @@ public class Rx_takeUntil2 extends BaseRxDemo {
         if(task != null) task.dispose();
     }
 
-    public static boolean isPrime(Long a) {
-        boolean flag = true;
-        if (a < 2) {// 素数不小于2
-            return false;
-        } else {
-            for (int i = 2; i <= Math.sqrt(a); i++) {
-                if (a % i == 0) {// 若能被整除，则说明不是素数，返回false
-                    flag = false;
-                    break;// 跳出循环
-                }
-            }
-        }
-        return flag;
-    }
 
 }

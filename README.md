@@ -198,9 +198,9 @@ Observable类型给GOF的观察者模式添加了两种缺少的语义，这样�
 数据源包括：
 - `io.reactivex.Flowable`: 0..N flows, supporting Reactive-Streams and backpressure
 - `io.reactivex.Observable`: 0..N flows, no backpressure
-- `io.reactivex.Single`: a flow of exactly 1 item or an error
-- `io.reactivex.Completable`: a flow without items but only a completion or error signal
-- `io.reactivex.Maybe`: a flow with no items, exactly one item or an error
+- `io.reactivex.Single`: a flow of exactly 1 item or an error --- 要么有一条Item走onNext，要么出错走onError，不会走onComplete
+- `io.reactivex.Completable`: a flow without items but only a completion or error signal -- 只会走onComplete
+- `io.reactivex.Maybe`: a flow with no items, exactly one item or an error -- 有数据了，就只走onNext，没数据，就只走onComplete，出错，就走onError
 
 各种数据源的创建和订阅：
 ```

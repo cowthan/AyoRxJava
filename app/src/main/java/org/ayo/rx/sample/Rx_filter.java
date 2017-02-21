@@ -1,5 +1,7 @@
 package org.ayo.rx.sample;
 
+import com.jiang.android.rxjavaapp.App;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
@@ -34,7 +36,7 @@ public class Rx_filter extends BaseRxDemo {
                 .filter(new Predicate<Long>() {
                     @Override
                     public boolean test(Long aLong) throws Exception {
-                        return isPrime(aLong);
+                        return App.isPrime(aLong);
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -64,19 +66,5 @@ public class Rx_filter extends BaseRxDemo {
         if(task != null) task.dispose();
     }
 
-    public static boolean isPrime(Long a) {
-        boolean flag = true;
-        if (a < 2) {// 素数不小于2
-            return false;
-        } else {
-            for (int i = 2; i <= Math.sqrt(a); i++) {
-                if (a % i == 0) {// 若能被整除，则说明不是素数，返回false
-                    flag = false;
-                    break;// 跳出循环
-                }
-            }
-        }
-        return flag;
-    }
 
 }

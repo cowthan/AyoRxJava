@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="richtext-">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/richtext/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/richtext/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/richtext/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_take extends BaseRxDemo {
+public class Rx_skip2 extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
@@ -24,13 +24,13 @@ public class Rx_take extends BaseRxDemo {
 
     @Override
     protected String getImageName() {
-        return "take";
+        return "skip";
     }
 
     @Override
     protected String getCodeNormal() {
         return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
-                "    .take(4)";
+                "     .skip(4, TimeUnit.SECONDS)";
     }
 
     private Disposable task;
@@ -41,7 +41,7 @@ public class Rx_take extends BaseRxDemo {
             - 直接调用complete
          */
         task = Flowable.interval(1, 1, TimeUnit.SECONDS)
-                .take(4)
+                .skip(4, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {

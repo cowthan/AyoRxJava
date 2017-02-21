@@ -23,6 +23,7 @@ import com.jiang.android.rxjavaapp.R;
 import com.zzhoujay.markdown.MarkDown;
 
 import org.ayo.component.MasterFragment;
+import org.ayo.lang.Lang;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,6 +53,8 @@ public abstract class BaseRxDemo extends MasterFragment {
     protected String getImageName(){
         return getTitle();
     }
+    protected String getCodeNormal(){ return null; }
+    protected String getCodeError(){ return null; }
 
     @Override
     protected int getLayoutId() {
@@ -63,6 +66,7 @@ public abstract class BaseRxDemo extends MasterFragment {
     View container_doc;
     TextView textView;
     ImageView iv_ball;
+    TextView tv_code;
 
     private Spanned doc;
 
@@ -73,12 +77,14 @@ public abstract class BaseRxDemo extends MasterFragment {
         Button btn3 = id(R.id.btn3);
 
         tv = id(R.id.tv);
+        tv_code = id(R.id.tv_code);
         scrollView = id(R.id.scrollView);
 
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 clearLog();
+                refreshCode(true);
                 runOk();
             }
         });
@@ -87,6 +93,7 @@ public abstract class BaseRxDemo extends MasterFragment {
             @Override
             public void onClick(View v) {
                 clearLog();
+                refreshCode(false);
                 runError();
             }
         });
@@ -140,6 +147,18 @@ public abstract class BaseRxDemo extends MasterFragment {
                 hideDoc();
             }
         });
+
+        refreshCode(true);
+    }
+
+    private void refreshCode(boolean useNormal){
+        String code = useNormal ? getCodeNormal() : getCodeError();
+        if(Lang.isEmpty(code)){
+            tv_code.setVisibility(View.GONE);
+        }else{
+            tv_code.setVisibility(View.VISIBLE);
+            tv_code.setText(code);
+        }
     }
 
     private void readDoc(){
