@@ -1,21 +1,16 @@
 package org.ayo.rx.sample;
 
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import io.reactivex.internal.functions.Functions;
-import io.reactivex.internal.operators.flowable.FlowableInternalHelper;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_take extends BaseRxDemo {
+public class Rx_firstOrError extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
@@ -29,8 +24,8 @@ public class Rx_take extends BaseRxDemo {
 
     @Override
     protected String getCodeNormal() {
-        return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
-                "    .take(4)";
+        return "Flowable.<Long>empty()\n" +
+                "    .firstOrError()";
     }
 
     private Disposable task;
@@ -40,8 +35,8 @@ public class Rx_take extends BaseRxDemo {
         - empty
             - 直接调用complete
          */
-        task = Flowable.interval(1, 1, TimeUnit.SECONDS)
-                .take(4)
+        task = Flowable.<Long>empty()
+                .firstOrError()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
@@ -49,14 +44,12 @@ public class Rx_take extends BaseRxDemo {
                     public void accept(Long s) throws Exception {
                         notifyy(s + "");
                     }
-                }, Functions.ERROR_CONSUMER,
-                        new Action() {
-                            @Override
-                            public void run() throws Exception {
-                                notifyy("onComplete---结束了！@@");
-                            }
-                        },
-                        FlowableInternalHelper.RequestMax.INSTANCE);
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        notifyy("出错：" + throwable.getMessage());
+                    }
+                });
 
     }
 

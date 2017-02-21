@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import io.reactivex.internal.functions.Functions;
 import io.reactivex.internal.operators.flowable.FlowableInternalHelper;
 import io.reactivex.schedulers.Schedulers;
@@ -15,25 +16,28 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_take extends BaseRxDemo {
+public class Rx_skipWhile extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
         return "take";
     }
-
     @Override
     protected String getImageName() {
-        return "take";
+        return "skipWhile";
     }
+    private Disposable task;
 
     @Override
     protected String getCodeNormal() {
         return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
-                "    .take(4)";
+                "                .skipWhile(new Predicate<Long>() {\n" +
+                "                    @Override\n" +
+                "                    public boolean test(Long aLong) throws Exception {\n" +
+                "                        return aLong <= 5 ;\n" +
+                "                    }\n" +
+                "                })";
     }
-
-    private Disposable task;
 
     protected void runOk(){
         /*
@@ -41,7 +45,12 @@ public class Rx_take extends BaseRxDemo {
             - 直接调用complete
          */
         task = Flowable.interval(1, 1, TimeUnit.SECONDS)
-                .take(4)
+                .skipWhile(new Predicate<Long>() {
+                    @Override
+                    public boolean test(Long aLong) throws Exception {
+                        return aLong <= 5 ;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {

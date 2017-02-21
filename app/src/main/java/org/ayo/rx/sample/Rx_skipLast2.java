@@ -15,25 +15,27 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_take extends BaseRxDemo {
+public class Rx_skipLast2 extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
         return "take";
     }
-
     @Override
     protected String getImageName() {
-        return "take";
+        return "skipLast2";
     }
+
+    private Disposable task;
 
     @Override
     protected String getCodeNormal() {
         return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
-                "    .take(4)";
+                "                .take(10)\n" +
+                "                .skipLast(4, TimeUnit.SECONDS)\n" +
+                "这个有点意思，会取前10条（也就是10秒），跳过最后4秒（4条）\n" +
+                "然后一下发射出来";
     }
-
-    private Disposable task;
 
     protected void runOk(){
         /*
@@ -41,7 +43,8 @@ public class Rx_take extends BaseRxDemo {
             - 直接调用complete
          */
         task = Flowable.interval(1, 1, TimeUnit.SECONDS)
-                .take(4)
+                .take(10)
+                .skipLast(4, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
@@ -68,6 +71,5 @@ public class Rx_take extends BaseRxDemo {
         super.onDestroy2();
         if(task != null) task.dispose();
     }
-
 
 }

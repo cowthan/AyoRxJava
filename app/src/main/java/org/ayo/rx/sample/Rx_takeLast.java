@@ -17,14 +17,20 @@ public class Rx_takeLast extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "takeLast";
+        return "take";
     }
     @Override
     protected String getImageName() {
-        return "take";
+        return "takeLast";
     }
 
     private Disposable task;
+
+    @Override
+    protected String getCodeNormal() {
+        return "Flowable.just(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L)\n" +
+                "        .takeLast(5)";
+    }
 
     protected void runOk(){
         /*
@@ -60,19 +66,5 @@ public class Rx_takeLast extends BaseRxDemo {
         if(task != null) task.dispose();
     }
 
-    public static boolean isPrime(Long a) {
-        boolean flag = true;
-        if (a < 2) {// 素数不小于2
-            return false;
-        } else {
-            for (int i = 2; i <= Math.sqrt(a); i++) {
-                if (a % i == 0) {// 若能被整除，则说明不是素数，返回false
-                    flag = false;
-                    break;// 跳出循环
-                }
-            }
-        }
-        return flag;
-    }
 
 }

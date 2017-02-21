@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import io.reactivex.internal.functions.Functions;
+import io.reactivex.functions.Function;
 import io.reactivex.internal.operators.flowable.FlowableInternalHelper;
 import io.reactivex.schedulers.Schedulers;
 
@@ -18,30 +18,24 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class Rx_takeUntil1 extends BaseRxDemo {
+public class Rx_timeout3 extends BaseRxDemo {
 
     @Override
     protected String getTitle() {
-        return "take";
+        return "timeout";
     }
+
     @Override
     protected String getImageName() {
-        return "takeUntil1";
+        return "timeout3";
     }
-    private Disposable task;
 
     @Override
     protected String getCodeNormal() {
-        return "Flowable.interval(1, 1, TimeUnit.SECONDS)\n" +
-                "                .takeUntil(new Publisher<Long>() {\n" +
-                "                    @Override\n" +
-                "                    public void subscribe(Subscriber<? super Long> s) {\n" +
-                "\n" +
-                "                        s.onNext(1L);\n" +
-                "                        s.onComplete();\n" +
-                "                    }\n" +
-                "                })";
+        return "";
     }
+
+    private Disposable task;
 
     protected void runOk(){
         /*
@@ -49,22 +43,41 @@ public class Rx_takeUntil1 extends BaseRxDemo {
             - 直接调用complete
          */
         task = Flowable.interval(1, 1, TimeUnit.SECONDS)
-                .takeUntil(new Publisher<Long>() {
+                .take(10)
+                .flatMap(new Function<Long, Publisher<Long>>() {
+                    @Override
+                    public Publisher<Long> apply(Long aLong) throws Exception {
+                        if(aLong <= 5){
+                            return Flowable.just(aLong);
+                        }else{
+                            return Flowable.just(aLong).delay(2000, TimeUnit.MILLISECONDS);
+                        }
+                    }
+                })
+                .timeout(new Publisher<Long>() {  /////----这个没他妈整明白
                     @Override
                     public void subscribe(Subscriber<? super Long> s) {
 
-                        s.onNext(1L);
-                        s.onComplete();
+                    }
+                }, new Function<Long, Publisher<Long>>() {
+                    @Override
+                    public Publisher<Long> apply(Long aLong) throws Exception {
+                        return null;
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long s) throws Exception {
-                        notifyy(s + "");
-                    }
-                }, Functions.ERROR_CONSUMER,
+                               @Override
+                               public void accept(Long s) throws Exception {
+                                   notifyy(s + "");
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) throws Exception {
+                                   notifyy("出错：其实是超时了（2000毫秒不发就超时）--" + throwable.getMessage());
+                               }
+                           },
                         new Action() {
                             @Override
                             public void run() throws Exception {

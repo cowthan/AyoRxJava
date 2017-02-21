@@ -22,7 +22,44 @@
     - 行为和takeUntil一样
     - 条件：Predicate
     - 我一看还以为这个永远不会停止，但其实还是能停止，一旦不符合条件，发射出这一个不符合条件的item，然后走了onComplete
-    
+- skip
+    - 跳过
+    - 可以按count
+    - 可以按time
+- skipLast
+    - 跳过最后N条
+    - 跳过最后N秒
+- skipUntil
+    - 只支持Publisher，不会用啊卧槽！！！
+- skipWhile
+    - 支持Predicate
+    - 只要满足条件，就跳过
+    - 一旦不满足条件，就输出
+    - 不会导致interval停止，这个才像回事
+- firstElement
+    - 返回Maybe，因为不一定有第一个item
+    - 如果empty，则直接走了onComlete
+    - 如果error，则直接走了onError
+    - 如果never，则什么也不会调
+    - 如果正常，则走onNext一次，但是不走onComplete！！
+- first(defaultItem)
+    - 返回Single，参数是默认值
+    - error了就error
+    - empty，never什么的，总会返回默认值
+    - never还就是什么都不发啊
+    - 所以就是总是有一个Item，或者error，正是Single
+- firstOrError
+    - 返回Single
+    - 要么有，要么错
+- 对应的还有
+    - last(defaultItem)
+    - lastElement()
+    - lastOrError
+- 还有
+    - elementAt(index)
+    - elementAt(index, T defaultItem)
+    - elementAtOrError(index)
+
 ```
 .take(3)
 .take(3, TimeUnit.SECONDS)
