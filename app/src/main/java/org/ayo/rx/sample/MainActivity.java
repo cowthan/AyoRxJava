@@ -139,6 +139,7 @@ public class MainActivity extends MainPagerActivity {
                 menuItem.addLeaf(new Leaf("debounce和throttleWithTimeout--by sampler", "", Rx_debounce2.class));
                 menuItem.addLeaf(new Leaf("throttleFirst", "", Rx_throttleFirst.class));
 
+
                 menuItem.addLeaf(new Leaf("-----条件和布尔操作", "", null));
                 menuItem.addLeaf(new Leaf("amb", "给定多个Observable，只让第一个发射数据的Observable发射全部数据", null));
                 menuItem.addLeaf(new Leaf("defaultIfEmpty", "发射来自原始Observable的数据，如果原始Observable没有发射数据，就发射默认数据", null));
